@@ -1,0 +1,42 @@
+[workspace]
+resolver = "3"
+members = [
+    "domain",
+    "infrastructure",
+    "services",
+    "rest_api",
+    "migration",
+    "launcher",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+
+[workspace.dependencies]
+stano-common = "{{ stano_version }}"
+stano-di = "{{ stano_version }}"
+stano-di-macros = "{{ stano_version }}"
+stano-route-macros = "{{ stano_version }}"
+stano-security = "{{ stano_version }}"
+stano-axum = "{{ stano_version }}"
+stano-launcher = "{{ stano_version }}"
+stano-seaorm = "{{ stano_version }}"
+stano-starter-domain = "{{ stano_version }}"
+stano-starter-rest = "{{ stano_version }}"
+stano-starter-service = "{{ stano_version }}"
+
+# Uncomment to build against a local checkout of modular-rust-platform while developing
+# the platform and this app together:
+#[patch.crates-io]
+#stano-axum             = { path = "../../modular-rust-platform/crates/stano-axum" }
+#stano-common           = { path = "../../modular-rust-platform/crates/stano-common" }
+#stano-di               = { path = "../../modular-rust-platform/crates/stano-di" }
+#stano-di-macros        = { path = "../../modular-rust-platform/crates/stano-di-macros" }
+#stano-launcher         = { path = "../../modular-rust-platform/crates/stano-launcher" }
+#stano-route-macros     = { path = "../../modular-rust-platform/crates/stano-route-macros" }
+#stano-security         = { path = "../../modular-rust-platform/crates/stano-security" }
+#stano-seaorm           = { path = "../../modular-rust-platform/crates/stano-seaorm" }
+#stano-starter-domain   = { path = "../../modular-rust-platform/crates/stano-starter-domain" }
+#stano-starter-rest     = { path = "../../modular-rust-platform/crates/stano-starter-rest" }
+#stano-starter-service  = { path = "../../modular-rust-platform/crates/stano-starter-service" }

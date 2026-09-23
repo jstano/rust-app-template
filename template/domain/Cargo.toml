@@ -1,0 +1,10 @@
+[package]
+name = "{{ crate_prefix }}-domain"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+stano-common = { workspace = true }
+stano-di = { workspace = true }
+stano-di-macros = { workspace = true }
+serde = { version = "1", features = ["derive"] }

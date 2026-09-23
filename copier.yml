@@ -1,0 +1,45 @@
+_templates_suffix: ""
+_subdirectory: template
+
+project_name:
+  type: str
+  help: "Project name, kebab-case (e.g. my-service). Used as the workspace/binary crate name."
+  validator: >-
+    {% if not (project_name | regex_search('^[a-z][a-z0-9-]*$')) %}
+    Must be lowercase letters, digits, and hyphens, starting with a letter.
+    {% endif %}
+
+crate_prefix:
+  type: str
+  help: "Prefix for member crate names (e.g. my-service -> my-service-domain, my-service-rest-api)"
+  default: "{{ project_name }}"
+  validator: >-
+    {% if not (crate_prefix | regex_search('^[a-z][a-z0-9-]*$')) %}
+    Must be lowercase letters, digits, and hyphens, starting with a letter.
+    {% endif %}
+
+stano_version:
+  type: str
+  help: "Version of the published stano-* platform crates to depend on"
+  default: "0.3.0"
+
+db_name:
+  type: str
+  help: "PostgreSQL database name"
+  default: "{{ project_name | replace('-', '_') }}"
+
+db_username:
+  type: str
+  help: "PostgreSQL username"
+  default: "postgres"
+
+db_password:
+  type: str
+  help: "PostgreSQL password"
+  secret: true
+  default: ""
+
+_tasks:
+  - command: "cargo fmt"
+    when: "{{ _copier_conf.os != 'windows' }}"
+  - command: "cargo build"

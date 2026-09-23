@@ -1,0 +1,27 @@
+[package]
+name = "{{ project_name }}"
+version.workspace = true
+edition.workspace = true
+publish = false
+
+[[bin]]
+name = "{{ project_name }}"
+path = "src/main.rs"
+
+[dependencies]
+{{ crate_prefix }}-domain = { path = "../domain" }
+{{ crate_prefix }}-infrastructure = { path = "../infrastructure" }
+{{ crate_prefix }}-services = { path = "../services" }
+{{ crate_prefix }}-rest-api = { path = "../rest_api" }
+stano-di = { workspace = true }
+stano-launcher = { workspace = true }
+stano-security = { workspace = true }
+
+utoipa-axum = { version = "0.2" }
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+anyhow = "1"
+
+[dev-dependencies]
+axum = { version = "0.8.7" }
+tower = { version = "0.5", features = ["util"] }
+serde_json = "1.0"

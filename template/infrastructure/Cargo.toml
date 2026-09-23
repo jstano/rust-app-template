@@ -1,0 +1,10 @@
+[package]
+name = "{{ crate_prefix }}-infrastructure"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+{{ crate_prefix }}-domain = { path = "../domain" }
+stano-common = { workspace = true }
+stano-di = { workspace = true }
+stano-di-macros = { workspace = true }

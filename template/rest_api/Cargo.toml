@@ -1,0 +1,14 @@
+[package]
+name = "{{ crate_prefix }}-rest-api"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+{{ crate_prefix }}-domain = { path = "../domain" }
+{{ crate_prefix }}-services = { path = "../services" }
+stano-common = { workspace = true }
+stano-starter-rest = { workspace = true }
+
+axum = { version = "0.8.7" }
+utoipa = { version = "5", features = ["macros"] }
+serde = { version = "1", features = ["derive"] }
