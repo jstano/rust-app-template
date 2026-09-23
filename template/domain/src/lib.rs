@@ -1,5 +1,5 @@
 //! Domain layer: the `Item` entity and the `ItemRepository` port that
-//! `{{ crate_prefix }}-infrastructure` implements. Zero external deps beyond the
+//! `{{ crate_prefix }}-persistence` implements. Zero external deps beyond the
 //! platform's DI/error primitives — no Axum, no SeaORM, no serde beyond deriving on
 //! plain data.
 //!

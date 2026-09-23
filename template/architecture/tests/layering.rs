@@ -17,7 +17,7 @@ fn role_of(pkg: &Package) -> Option<&'static str> {
     let dir = pkg.manifest_path.parent()?.file_name()?;
     Some(match dir {
         "domain" => "domain",
-        "infrastructure" => "infrastructure",
+        "persistence" => "persistence",
         "services" => "services",
         "rest_api" => "rest_api",
         "migration" => "migration",
@@ -31,7 +31,7 @@ fn role_of(pkg: &Package) -> Option<&'static str> {
 fn forbidden_for(role: &str) -> &'static [&'static str] {
     match role {
         "domain" => &[
-            "infrastructure",
+            "persistence",
             "services",
             "rest_api",
             "launcher",
@@ -41,7 +41,7 @@ fn forbidden_for(role: &str) -> &'static [&'static str] {
             "stano-launcher",
             "stano-seaorm",
         ],
-        "infrastructure" => &[
+        "persistence" => &[
             "services",
             "rest_api",
             "launcher",
@@ -50,7 +50,7 @@ fn forbidden_for(role: &str) -> &'static [&'static str] {
             "stano-launcher",
         ],
         "services" => &[
-            "infrastructure",
+            "persistence",
             "rest_api",
             "launcher",
             "stano-axum",
@@ -58,7 +58,7 @@ fn forbidden_for(role: &str) -> &'static [&'static str] {
             "stano-launcher",
         ],
         "rest_api" => &["launcher", "stano-launcher"],
-        "migration" => &["domain", "infrastructure", "services", "rest_api", "launcher"],
+        "migration" => &["domain", "persistence", "services", "rest_api", "launcher"],
         "launcher" => &[],
         _ => &[],
     }
@@ -155,7 +155,7 @@ fn launcher_wires_every_layer() {
         .filter_map(|dep| role_by_id.get(&dep.pkg).copied())
         .collect();
 
-    for expected in ["domain", "infrastructure", "services", "rest_api"] {
+    for expected in ["domain", "persistence", "services", "rest_api"] {
         assert!(
             wired_roles.contains(&expected),
             "launcher must directly depend on the {expected} crate — found: {wired_roles:?}"

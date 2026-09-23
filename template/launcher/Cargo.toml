@@ -10,7 +10,7 @@ path = "src/main.rs"
 
 [dependencies]
 {{ crate_prefix }}-domain = { path = "../domain" }
-{{ crate_prefix }}-infrastructure = { path = "../infrastructure" }
+{{ crate_prefix }}-persistence = { path = "../persistence" }
 {{ crate_prefix }}-services = { path = "../services" }
 {{ crate_prefix }}-rest-api = { path = "../rest_api" }
 stano-di = { workspace = true }

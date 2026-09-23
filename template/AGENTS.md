@@ -12,7 +12,7 @@ rules for *this* app.
     -> rest_api (HTTP handlers, authorization)
     -> services (business layer)
     -> domain (entities, repository traits — zero external deps)
-infrastructure -> domain (repository adapter impls)
+persistence -> domain (repository adapter impls)
 ```
 
 ## Layering rules
@@ -20,8 +20,8 @@ infrastructure -> domain (repository adapter impls)
 | Layer | Error type | May depend on | Must NOT depend on |
 |---|---|---|---|
 | `domain` | `DomainError`/`stano_common::ServiceError` | `stano-common`, `stano-di`, `stano-di-macros` | anything else |
-| `infrastructure` | `anyhow::Error` | `domain`, `stano-common`, `stano-di-macros` (+ SeaORM/HTTP clients when wired) | `services`, `rest_api`, `launcher` |
-| `services` | `stano_common::ServiceError` | `domain`, `stano-common`, `stano-di`, `stano-di-macros` | `infrastructure`, `rest_api`, `stano-axum`, `stano-launcher` |
+| `persistence` | `anyhow::Error` | `domain`, `stano-common`, `stano-di-macros` (+ SeaORM/HTTP clients when wired) | `services`, `rest_api`, `launcher` |
+| `services` | `stano_common::ServiceError` | `domain`, `stano-common`, `stano-di`, `stano-di-macros` | `persistence`, `rest_api`, `stano-axum`, `stano-launcher` |
 | `rest_api` | `stano_axum::ApiError` | `domain`, `services`, `stano-common`, `stano-starter-rest` | `stano-launcher` (only `launcher/` may depend on it) |
 | `launcher` (`main.rs`) | `anyhow::Error` | everything | — (composition root) |
 
@@ -64,7 +64,7 @@ cargo fmt --check
 
 ## Replacing the starter `Item` slice
 
-`Item`/`ItemRepository`/`ItemService` in `domain`/`infrastructure`/`services`/`rest_api`
+`Item`/`ItemRepository`/`ItemService` in `domain`/`persistence`/`services`/`rest_api`
 are a placeholder vertical slice proving the platform wiring works end-to-end. Replace
 them with your own entities, following the same shape (one `#[component]` trait per
 port, one `#[service(dyn Trait)]` impl per adapter).

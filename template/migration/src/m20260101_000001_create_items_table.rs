@@ -1,6 +1,6 @@
 //! Starter migration for the `items` table backing the `Item` entity in
-//! `{{ crate_prefix }}-domain`. Not yet wired into `{{ crate_prefix }}-infrastructure`
-//! (which uses an in-memory store) — switch the infrastructure adapter to `stano-seaorm`
+//! `{{ crate_prefix }}-domain`. Not yet wired into `{{ crate_prefix }}-persistence`
+//! (which uses an in-memory store) — switch the persistence adapter to `stano-seaorm`
 //! and point it at this table when you're ready for real persistence.
 
 use sea_orm_migration::prelude::*;

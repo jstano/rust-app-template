@@ -47,11 +47,12 @@ its `stano-example-app` reference implementation:
 ```
 <project_name>/
 ├── domain/          # entities + repository traits, zero external deps
-├── infrastructure/  # repository adapter impls
+├── persistence/     # repository adapter impls
 ├── services/        # business layer, service traits + impls
 ├── rest_api/        # HTTP handlers (#[get]/#[post]), authorization wiring
-├── migration/        # SeaORM migrations (starter, not wired into infrastructure yet)
-└── launcher/        # composition root: main.rs, Dockerfile
+├── migration/        # SeaORM migrations (starter, not wired into persistence yet)
+├── launcher/        # composition root: main.rs, Dockerfile
+└── architecture/    # ArchUnit-style layering tests
 ```
 
 See `template/README.md` and `template/AGENTS.md` for the generated project's own

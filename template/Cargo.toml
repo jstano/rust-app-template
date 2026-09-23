@@ -2,7 +2,7 @@
 resolver = "3"
 members = [
     "domain",
-    "infrastructure",
+    "persistence",
     "services",
     "rest_api",
     "migration",

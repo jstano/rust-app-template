@@ -8,7 +8,7 @@ A Rust backend built on the [modular-rust-platform](https://github.com/jstano/mo
 ```
 {{ project_name }}/
 ├── domain/          # {{ crate_prefix }}-domain: entities + repository traits, zero external deps
-├── infrastructure/  # {{ crate_prefix }}-infrastructure: repository adapter impls (in-memory starter)
+├── persistence/     # {{ crate_prefix }}-persistence: repository adapter impls (in-memory starter)
 ├── services/        # {{ crate_prefix }}-services: business layer, service traits + impls
 ├── rest_api/        # {{ crate_prefix }}-rest-api: HTTP handlers, authorization wiring
 ├── migration/        # {{ crate_prefix }}-migration: SeaORM migrations (starter, not yet wired in)
@@ -36,7 +36,7 @@ hardcoded demo JWT keypair. Before deploying anywhere real:
    ```
    and set `JWT_PRIVATE_KEY`/`JWT_PUBLIC_KEY` in `.env` from those files.
 3. Start Postgres (`docker compose up -d postgres`) and switch
-   `{{ crate_prefix }}-infrastructure`'s `ItemRepository` impl to a `stano-seaorm`-backed
+   `{{ crate_prefix }}-persistence`'s `ItemRepository` impl to a `stano-seaorm`-backed
    adapter, running `migration/`'s schema against it.
 
 ## Try it
