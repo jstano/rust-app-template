@@ -28,6 +28,12 @@ infrastructure -> domain (repository adapter impls)
 Only the `launcher` binary crate may depend on `stano-launcher`. `rest_api` depends on
 `stano-starter-rest`/`stano-axum` only, so it stays a lean, launcher-agnostic adapter.
 
+This table is enforced, not just documented: `architecture/tests/layering.rs` reads the
+resolved `Cargo.toml` dependency graph via `cargo metadata` and fails `cargo test` if any
+crate gains a forbidden dependency, or if `launcher` stops wiring one of the layers. If
+you deliberately change the architecture, update both the code and this table and the
+`forbidden_for`/expected-role lists in that test together.
+
 ## DI pattern
 
 `#[component]` on a trait + `#[service(dyn Trait)]` on the impl struct (fields must be

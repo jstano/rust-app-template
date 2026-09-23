@@ -12,7 +12,8 @@ A Rust backend built on the [modular-rust-platform](https://github.com/jstano/mo
 ├── services/        # {{ crate_prefix }}-services: business layer, service traits + impls
 ├── rest_api/        # {{ crate_prefix }}-rest-api: HTTP handlers, authorization wiring
 ├── migration/        # {{ crate_prefix }}-migration: SeaORM migrations (starter, not yet wired in)
-└── launcher/        # {{ project_name }}: composition root — main.rs, Dockerfile
+├── launcher/        # {{ project_name }}: composition root — main.rs, Dockerfile
+└── architecture/    # {{ crate_prefix }}-architecture: ArchUnit-style layering tests
 ```
 
 See `AGENTS.md` for the layering rules and dependency-flow conventions.
@@ -55,3 +56,8 @@ cargo fmt --check
 cargo clippy --workspace -- -D warnings
 cargo test --workspace
 ```
+
+`cargo test --workspace` includes `architecture/tests/layering.rs`, which asserts the
+layering rules in `AGENTS.md` against the actual `Cargo.toml` dependency graph (via
+`cargo metadata`) — it fails the build if, say, `domain` ever gains a dependency on
+`stano-axum`, or `launcher` stops wiring one of the layers.
